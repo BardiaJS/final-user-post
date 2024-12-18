@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('tags');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
-            $table->boolean('is_visible')->default(true);
+            $table->string('is_visible')->default(true);
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->references('id')->on('users');
         });
     }

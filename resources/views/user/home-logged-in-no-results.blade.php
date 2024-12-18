@@ -1,4 +1,4 @@
-<x-layout>
+<x-logged-in-page-layout>
     <div class="container py-md-5 container--narrow">
         <div class="text-center">
             <h2>Hello <strong>{{auth()->user()->display_name}}</strong>, your feed is empty.</h2>
@@ -8,4 +8,4 @@
         </div>
     </div>
 
-</x-layout>
+</x-logged-in-page-layout>

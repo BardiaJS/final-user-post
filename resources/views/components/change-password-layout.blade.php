@@ -20,23 +20,35 @@
 </head>
 
 <body>
-    @if (auth()->user())
-
-    @endif
     <header class="header-bar mb-3">
         <div class="container d-flex flex-column flex-md-row align-items-center p-3">
             <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
-            <form action="/" method="GET" class="mb-0 pt-2 pt-md-0">
-                <div class="row align-items-center">
-                    <div class="col-md-auto">
-                        <button class="btn btn-primary btn-sm">back</button>
+            @auth
+
+                <form action="/welcome-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+
+                    <div class="row align-items-center">
+                        <div class="col-md-auto">
+                            <button class="btn btn-primary btn-sm">back</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+
+                <form action="/logout" method="POST" class="mb-0 pt-2 pt-md-0">
+                    @csrf
+                    <div class="row align-items-center">
+                        <div class="col-md-auto">
+                            <button class="btn btn-primary btn-sm">Sign Out</button>
+                        </div>
+                    </div>
+                </form>
+            @endauth
+
+
+
         </div>
     </header>
     <!-- header ends here -->
-
     @if (session()->has('success'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
 
@@ -50,6 +62,7 @@
 
     @if (session()->has('failure'))
         <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="container container-narrow">
+
             <div class="container container--narrow">
                 <div class="alert alert-danger text-center">
                     {{ session('failure') }}
