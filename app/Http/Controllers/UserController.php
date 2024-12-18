@@ -17,7 +17,7 @@ class UserController extends Controller
                 $validated = $request->validate([
                     'first_name' => ['required', 'max:10'],
                     'last_name' => ['required', 'max:30'],
-                    'display_name' => ['required', 'max:10'],
+                    'display_name' => ['required', 'max:10' , 'regex:/^\S*$/'],
                     'email' => ['required', 'email', Rule::unique('users', 'email')],
                     'password' => ['required', 'min:6'],
                     'is_admin' => ['required', 'in:true,false']
@@ -28,7 +28,7 @@ class UserController extends Controller
                 $validated = $request->validate([
                     'first_name' => ['required', 'max:10'],
                     'last_name' => ['required', 'max:30'],
-                    'display_name' => ['required', 'max:10'],
+                    'display_name' => ['required', 'max:10' , 'regex:/^\S*$/'],
                     'email' => ['required', 'email', Rule::unique('users', 'email')],
                     'password' => ['required', 'min:6'],
                     'is_admin' => ['sometimes']
@@ -40,7 +40,7 @@ class UserController extends Controller
             $validated = $request->validate([
                 'first_name' => ['required', 'max:10'],
                 'last_name' => ['required', 'max:30'],
-                'display_name' => ['required', 'max:10'],
+                'display_name' => ['required', 'max:10' , 'regex:/^\S*$/'],
                 'email' => ['required', 'email', Rule::unique('users', 'email')],
                 'password' => ['required', 'min:6'],
                 'is_admin' => ['sometimes']

@@ -13,7 +13,7 @@ class PostController extends Controller
             'name' => ['required' , 'max:10'] ,
             'content' => ['required'] ,
             'tags' => ['required'] ,
-            'is_visible' => ['required'],
+            'is_visible' => ['sometimes' , 'in:true,false'],
         ]);
         $validated['user_id'] = Auth::user()->id;
         $post = Post::create($validated);
