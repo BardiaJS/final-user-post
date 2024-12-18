@@ -25,7 +25,7 @@
             <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
             @auth
 
-                <form action="/welcome-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                <form action="/profile/{{$post->user_id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
 
                     <div class="row align-items-center">
                         <div class="col-md-auto">

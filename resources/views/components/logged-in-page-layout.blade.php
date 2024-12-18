@@ -26,7 +26,7 @@
             @auth
                 @if (auth()->user()->is_super_admin == true or auth()->user()->is_admin == true)
 
-                    <form action="/" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                    <form action="/add-users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         @csrf
                         <div class="row align-items-center">
                             <div class="col-md-auto">

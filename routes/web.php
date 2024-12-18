@@ -20,12 +20,22 @@ use PHPUnit\Framework\Attributes\PostCondition;
 */
 
 Route::get('/', function () {
-    return view('home-page');
+    if(Auth::check()){
+        return view('user.home-logged-in-no-results ');
+    }else{
+        return view('home-page');
+    }
 })->name('login');
 
 //register
 //  route for send data for REGISTER
 Route::post('/register', [UserController::class, 'register'])->middleware('guest');
+
+
+// Route for add user for admins or super admins
+Route::get('/add-users' , function(){
+    return view('home-page');
+});
 
 
 //login
@@ -65,6 +75,11 @@ Route::get('/add-thumbnail/{post}' , function(){
 })->middleware('mustBeLoggedIn');
 
 
+
+
+// Route for delete the post
+Route::delete('/delete/{post}' , [PostController::class , 'delete']);
+
 // show a single post
 Route::get('/post/{post}' , [PostController::class , 'single_post']);
 // Route for get the profile page of the user
@@ -76,8 +91,8 @@ Route::get('/profile/{user}' , [UserController::class , 'profile']);
 
 
 
-
-
-
 // Route for singing out
 Route::post('/logout', [UserController::class, 'logout'])->middleware('mustBeLoggedIn');
+
+
+

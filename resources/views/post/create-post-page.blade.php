@@ -38,25 +38,13 @@
 
                     <div class="form-group">
                         <label for="is_visible-register" class="text-muted mb-1"><small>Is Visible</small></label>
-                        <input name="is_visible" id="is_visible-register" class="form-control" type="password"
-                            placeholder="Create a password" />
+                        <input name="is_visible" id="is_visible-register" class="form-control" type="text"
+                            placeholder="Is Visible?" />
                         @error('is_visible')
                             <p class="m-0 small alert alert-danger shadow-sm">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    @auth
-                        @if (auth()->user()->is_super_admin == true)
-                            <div class="form-group">
-                                <label for="is_admin" class="text-muted mb-1"><small>Is Admin?</small></label>
-                                <input name="is_admin" id="is_admin-register-confirm" class="form-control" type="text"
-                                    placeholder="Is Admin" />
-                                @error('is_admin')
-                                    <p class="m-0 small alert alert-danger shadow-sm">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        @endif
-                    @endauth
                     <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Post</button>
                 </form>
             </div>

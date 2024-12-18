@@ -33,28 +33,7 @@
                             </div>
                         </div>
                     </form>
-                    <form action="/" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                        @csrf
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Add User</button>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="/logout" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Post List</button>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="/logout" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Users</button>
-                            </div>
-                        </div>
-                    </form>
+
                 @endif
 
 
@@ -67,7 +46,7 @@
                     </div>
                 </form>
 
-                <form action="/logout" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                <form action="/profile/{{auth()->user()->id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
                             <button class="btn btn-primary btn-sm">Profile</button>
