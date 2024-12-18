@@ -21,4 +21,9 @@ class PostController extends Controller
         $post_id = $post->id;
         return redirect("/add-thumbnail/$post_id")->with('success' , "You successfully create a post!");
     }
+
+    public function single_post(Post $post){
+        $user = $post->user()->get();
+        return view('post.single-post' , ['post' => $post , 'user' => $user]);
+    }
 }

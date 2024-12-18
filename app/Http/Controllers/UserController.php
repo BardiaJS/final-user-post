@@ -17,7 +17,7 @@ class UserController extends Controller
                 $validated = $request->validate([
                     'first_name' => ['required', 'max:10'],
                     'last_name' => ['required', 'max:30'],
-                    'display_name' => ['required', 'max:10' , 'regex:/^\S*$/'],
+                    'display_name' => ['required', 'max:10', 'regex:/^\S*$/'],
                     'email' => ['required', 'email', Rule::unique('users', 'email')],
                     'password' => ['required', 'min:6'],
                     'is_admin' => ['required', 'in:true,false']
@@ -28,7 +28,7 @@ class UserController extends Controller
                 $validated = $request->validate([
                     'first_name' => ['required', 'max:10'],
                     'last_name' => ['required', 'max:30'],
-                    'display_name' => ['required', 'max:10' , 'regex:/^\S*$/'],
+                    'display_name' => ['required', 'max:10', 'regex:/^\S*$/'],
                     'email' => ['required', 'email', Rule::unique('users', 'email')],
                     'password' => ['required', 'min:6'],
                     'is_admin' => ['sometimes']
@@ -40,7 +40,7 @@ class UserController extends Controller
             $validated = $request->validate([
                 'first_name' => ['required', 'max:10'],
                 'last_name' => ['required', 'max:30'],
-                'display_name' => ['required', 'max:10' , 'regex:/^\S*$/'],
+                'display_name' => ['required', 'max:10', 'regex:/^\S*$/'],
                 'email' => ['required', 'email', Rule::unique('users', 'email')],
                 'password' => ['required', 'min:6'],
                 'is_admin' => ['sometimes']
@@ -83,7 +83,7 @@ class UserController extends Controller
             ]);
             $validated['password'] = Hash::make($validated['new_password']);
             $user->update($validated);
-            return redirect('/welcome-page')->with('success' , 'You successfully changed the password!');
+            return redirect('/welcome-page')->with('success', 'You successfully changed the password!');
         } else if ($is_admin == true) {
             if ($user->is_admin == 0 and $user->is_super_admin == 0) {
                 $validated = $request->validate([
@@ -92,9 +92,9 @@ class UserController extends Controller
                 ]);
                 $validated['password'] = Hash::make($validated['new_password']);
                 $user->update($validated);
-                return redirect('/welcome-page')->with('success' , 'You successfully changed the password!');
+                return redirect('/welcome-page')->with('success', 'You successfully changed the password!');
             } else {
-                return redirect('/change-password-page')->with('failure' , 'You cannot do that!');
+                return redirect('/change-password-page')->with('failure', 'You cannot do that!');
             }
         } else {
             if (Auth::user()->id == $user->id) {
@@ -106,14 +106,17 @@ class UserController extends Controller
                 if ($isCheck) {
                     $validated['password'] = Hash::make($validated['new_password']);
                     $user->update($validated);
-                    return redirect('/welcome-page')->with('success' , 'You successfully changed the password!');
+                    return redirect('/welcome-page')->with('success', 'You successfully changed the password!');
                 }
             } else {
-                return redirect('/change-password-page')->with('success' , 'You cannot do that!');
+                return redirect('/change-password-page')->with('success', 'You cannot do that!');
             }
         }
     }
 
-
-
+    public function profile(User $user)
+    {
+        $user_related_posts = $user->posts()->latest()->get();
+        return view('user.profile-page', ['user' => $user , 'posts' => $user_related_posts , 'post_count' => $user->posts()->count()]);
+    }
 }
