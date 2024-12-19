@@ -24,62 +24,16 @@
         <div class="container d-flex flex-column flex-md-row align-items-center p-3">
             <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
             @auth
-                @if (auth()->user()->is_super_admin == true or auth()->user()->is_admin === true)
-                    <form action="/add-users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                        @csrf
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Add User</button>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="/list/posts" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Post List</button>
-                            </div>
-                        </div>
-                    </form>
-                    <form action="/list/users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                        <div class="row align-items-center">
-                            <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Users</button>
-                            </div>
-                        </div>
-                    </form>
-                @endif
 
+                <form action="/welcome-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
 
-
-                <form action="/create-post-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Create Post</button>
+                            <button class="btn btn-primary btn-sm">back</button>
                         </div>
                     </div>
                 </form>
 
-                <form action="/profile/{{auth()->user()->id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                    <div class="row align-items-center">
-                        <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Profile</button>
-                        </div>
-                    </div>
-                </form>
-                <form action="/change-password-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                    <div class="row align-items-center">
-                        <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Change Password</button>
-                        </div>
-                    </div>
-                </form>
-                <form action="/post/public" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
-                    <div class="row align-items-center">
-                        <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Posts</button>
-                        </div>
-                    </div>
-                </form>
                 <form action="/logout" method="POST" class="mb-0 pt-2 pt-md-0">
                     @csrf
                     <div class="row align-items-center">

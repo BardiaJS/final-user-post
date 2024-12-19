@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 //register
 //  route for send data for REGISTER
-Route::post('/register', [UserController::class, 'register'])->middleware('guest');
+Route::post('/register', [UserController::class, 'register']);
 
 
 // Route for add user for admins or super admins
@@ -76,9 +76,10 @@ Route::get('/add-thumbnail/{post}' , function(){
 
 
 
+Route::get('/post/public' , [PostController::class , 'public_post'])->middleware('mustBeLoggedIn');
 
 // Route for delete the post
-Route::delete('/delete/{post}' , [PostController::class , 'delete']);
+Route::delete('/delete/{post}' , [PostController::class , 'delete'])->middleware('mustBeLoggedIn');
 
 // Route for list of users for admin
 Route::get('/list/users' , [UserController::class , 'user_list'])->middleware('mustBeLoggedIn');
@@ -88,10 +89,18 @@ Route::get('/post/{post}' , [PostController::class , 'single_post']);
 // Route for get the profile page of the user
 Route::get('/profile/{user}' , [UserController::class , 'profile']);
 
+// Route for list of all post for super admins
+Route::get('/list/posts' , [PostController::class , 'post_list'])->middleware('mustBeLoggedIn');
+
+// Route
+
 // Route for get edit
 Route::get('/edit-post-page/{post}' , [PostController::class , 'edit_form'])->middleware('mustBeLoggedIn');
 // Route for send edit data
 Route::put('/update-post/{post}' , [PostController::class , 'update_post']);
+
+
+// Route for see public posts
 
 
 

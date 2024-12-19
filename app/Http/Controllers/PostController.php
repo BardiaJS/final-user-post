@@ -9,59 +9,76 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function store_post(Request $request){
+    public function store_post(Request $request)
+    {
         $validated = $request->validate([
-            'name' => ['required' , 'max:10'] ,
-            'content' => ['required'] ,
-            'tags' => ['required'] ,
-            'is_visible' => ['sometimes' , 'in:true,false'],
+            'name' => ['required', 'max:10'],
+            'content' => ['required'],
+            'tags' => ['required'],
+            'is_visible' => ['sometimes', 'in:true,false'],
         ]);
         $validated['user_id'] = Auth::user()->id;
         $post = Post::create($validated);
         $post->id;
         $post_id = $post->id;
-        return redirect("/add-thumbnail/$post_id")->with('success' , "You successfully create a post!");
+        return redirect("/add-thumbnail/$post_id")->with('success', "You successfully create a post!");
     }
 
-    public function single_post(Post $post){
+    public function single_post(Post $post)
+    {
 
-        return view('post.single-post' , ['post' => $post]);
+        return view('post.single-post', ['post' => $post]);
     }
 
 
-    public function delete(Post $post){
-        if(auth()->user()->cannot('delete' , $post)){
+    public function delete(Post $post)
+    {
+        if (auth()->user()->cannot('delete', $post)) {
             return 'You cannot do that!';
-        }else{
+        } else {
             $post->delete();
             $user_id = auth()->user()->id;
-            return redirect("/profile/$user_id")->with('success' , 'You successfully deleted the post');
+            return redirect("/profile/$user_id")->with('success', 'You successfully deleted the post');
         }
     }
 
 
-    public function edit_form(Post $post){
-        if(auth()->user()->cannot('update' , $post)){
+    public function edit_form(Post $post)
+    {
+        if (auth()->user()->cannot('update', $post)) {
             return 'You cannot do that!';
-        }else{
-            return view('post.edit-post-page' , ['post' => $post]);
+        } else {
+            return view('post.edit-post-page', ['post' => $post]);
         }
     }
 
-    public function update_post(Request $request , Post $post){
+    public function update_post(Request $request, Post $post)
+    {
         $validated = $request->validate([
-            'name' => ['required' , 'max:10'] ,
-            'content' => ['required'] ,
-            'tags' => ['required'] ,
-            'is_visible' => ['sometimes' , 'in:true,false'],
+            'name' => ['required', 'max:10'],
+            'content' => ['required'],
+            'tags' => ['required'],
+            'is_visible' => ['sometimes', 'in:true,false'],
         ]);
         $validated['user_id'] = Auth::user()->id;
         $post->update($validated);
         $post->id;
-        $post_id = $post->id;
-        return back()->with('success' , "You successfully create a post!");
+        return back()->with('success', "You successfully create a post!");
     }
 
 
+    public function post_list()
+    {
+        if (auth()->user()->is_super_admin != true or auth()->user()->is_admin != true) {
+            return back()->with('failure' , "You can't do that");
+        } else {
+            $posts = Post::all();
+            return view('post.post-list', ['posts' => $posts]);
+        }
+    }
 
+    public function public_post(){
+        $posts = Post::where('is_visible' , 'true')->get();
+        return view('post.public-post' , ['posts' => $posts]);
+    }
 }
