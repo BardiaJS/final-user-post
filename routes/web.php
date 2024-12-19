@@ -80,10 +80,18 @@ Route::get('/add-thumbnail/{post}' , function(){
 // Route for delete the post
 Route::delete('/delete/{post}' , [PostController::class , 'delete']);
 
+// Route for list of users for admin
+Route::get('/list/users' , [UserController::class , 'user_list'])->middleware('mustBeLoggedIn');
+
 // show a single post
 Route::get('/post/{post}' , [PostController::class , 'single_post']);
 // Route for get the profile page of the user
 Route::get('/profile/{user}' , [UserController::class , 'profile']);
+
+// Route for get edit
+Route::get('/edit-post-page/{post}' , [PostController::class , 'edit_form'])->middleware('mustBeLoggedIn');
+// Route for send edit data
+Route::put('/update-post/{post}' , [PostController::class , 'update_post']);
 
 
 
