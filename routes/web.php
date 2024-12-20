@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,14 +68,23 @@ Route::get('/create-post-page' , function(){
     return view('post.create-post-page');
 })->middleware('mustBeLoggedIn');
 // Route for create post data
-Route::post('create-post' , [PostController::class , 'store_post'])->middleware('mustBeLoggedIn');
+Route::post('/create-post' , [PostController::class , 'store_post'])->middleware('mustBeLoggedIn');
+
+
 
 // Route for add thumbnail form
-Route::get('/add-thumbnail/{post}' , function(){
-    return view('ok-page');
+Route::get('/add-thumbnail/{post}' , function(Post $post){
+    return view('post.add-thumbnail' , ['post' => $post]);
 })->middleware('mustBeLoggedIn');
+//Route for set the thumbnail to the post
+Route::post('/upload-thumbnail/{post}' , [PostController::class , 'upload_change_thumbnail']);
 
+//Route for avatar form
+Route::get('/manage-avatar/{user}' , function(User $user){
+    return view('user.add-avatar' , ['user' => $user]);
+});
 
+Route::post('upload-avatar/{user}' , [UserController::class , 'upload_change_avatar']);
 
 Route::get('/post/public' , [PostController::class , 'public_post'])->middleware('mustBeLoggedIn');
 
@@ -92,7 +102,7 @@ Route::get('/profile/{user}' , [UserController::class , 'profile']);
 // Route for list of all post for super admins
 Route::get('/list/posts' , [PostController::class , 'post_list'])->middleware('mustBeLoggedIn');
 
-// Route
+
 
 // Route for get edit
 Route::get('/edit-post-page/{post}' , [PostController::class , 'edit_form'])->middleware('mustBeLoggedIn');

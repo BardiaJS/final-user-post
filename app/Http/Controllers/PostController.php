@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -70,15 +72,39 @@ class PostController extends Controller
     public function post_list()
     {
         if (auth()->user()->is_super_admin != true or auth()->user()->is_admin != true) {
-            return back()->with('failure' , "You can't do that");
+            return back()->with('failure', "You can't do that");
         } else {
             $posts = Post::all();
             return view('post.post-list', ['posts' => $posts]);
         }
     }
 
-    public function public_post(){
-        $posts = Post::where('is_visible' , 'true')->get();
-        return view('post.public-post' , ['posts' => $posts]);
+    public function public_post()
+    {
+        $posts = Post::where('is_visible', 'true')->get();
+        return view('post.public-post', ['posts' => $posts]);
     }
+
+    public function upload_change_thumbnail(Request $request, Post $post)
+    {
+
+        $user_id = $post->user->id;
+        $request->validate([
+            'thumbnail' => 'nullable|image|max:3000', // Validate image
+        ]);
+        $fileName = $post->id.'_'.uniqid().'.jpg';
+        $imageData = Image::make($request->file('thumbnail'))->fit(120)->encode('jpg');
+        Storage::put('public/thumbnails/'.$fileName, $imageData);
+        $oldThumbnail = $post->thumbnail;
+        $post->thumbnail = $fileName;
+        $post->save();
+
+        if($oldThumbnail != "/fallback-thumbnail.jpg"){
+            Storage::delete(str_replace("/storage/" , "public" , $oldThumbnail));
+        }
+        return redirect("/profile/$user_id")->with('success', 'thumbnail successfully uploaded!');
+    }
+
+
+
 }

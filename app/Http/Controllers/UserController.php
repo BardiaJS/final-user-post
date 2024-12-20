@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -77,7 +79,7 @@ class UserController extends Controller
         $is_super_admin = Auth::user()->is_super_admin;
         $is_admin = Auth::user()->is_admin;
         if ($is_super_admin == true) {
-            $validated = $request->validated([
+            $validated = $request->validate([
                 'password' => 'required',
                 'new_password' => 'required_without_all|min:6|different:password'
             ]);
@@ -124,5 +126,23 @@ class UserController extends Controller
             $users = User::all();
             return view('user.user-list' , ['users' => $users]);
         }
+    }
+
+    public function upload_change_avatar(Request $request , User $user){
+        $user_id = $user->id;
+        $request->validate([
+            'avatar' => 'nullable|image|max:3000', // Validate image
+        ]);
+        $fileName = $user->id.'_'.uniqid().'.jpg';
+        $imageData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
+        Storage::put('public/avatars/'.$fileName, $imageData);
+        $oldavatar = $user->avatar;
+        $user->avatar = $fileName;
+        $user->save();
+
+        if($oldavatar != "/fallback-avatar.jpg"){
+            Storage::delete(str_replace("/storage/" , "public" , $oldavatar));
+        }
+        return redirect("/profile/$user_id")->with('success', 'avatar successfully uploaded!');
     }
 }
