@@ -6,10 +6,9 @@
         <div class="list-group">
             @foreach ($users as $user)
                 <div style="justify-content: center; " class="profile-nav nav nav-tabs pt-2 mb-4">
-                    <a href="/profile/{{$user->id}}" class="profile-nav-link nav-item nav-link active">
+                    <a href="/profile/{{ $user->id }}" class="profile-nav-link nav-item nav-link active">
                         <h2 style="justify-content: center;">
-                            <img class="avatar-small"
-                                src="https://gravatar.com/avatar/b9408a09298632b5151200f3449434ef?s=128" />
+                            <img class="avatar-small" src="{{ $user->avatar }}" />
                             {{ $user->first_name }} {{ $user->last_name }}
                         </h2>
                         <h4 style="display:flex; align-items:center; justify-content: center;">
@@ -17,8 +16,28 @@
                         </h4>
 
                     </a>
-                </div>
+                    <div class="d-flex justify-content-between">
 
+                        @can('update', $user)
+                            <span class="pt-2">
+                                @if (Auth::user() != $user)
+                                    <a href="/change-user-information/{{ $user->id }}" class="text-primary mr-2"
+                                        data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                            class="fas fa-edit"></i></a>
+                                @endif
+                                <form class="delete-post-form d-inline" action="/delete/user/{{ $user->id }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    @if (Auth::user() != $user)
+                                        <button class="delete-post-button text-danger" data-toggle="tooltip"
+                                            data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
+                                    @endif
+                                </form>
+                            </span>
+                        @endcan
+                    </div>
+                </div>
             @endforeach
 
         </div>

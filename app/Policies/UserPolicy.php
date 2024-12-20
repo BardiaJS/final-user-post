@@ -37,6 +37,10 @@ class UserPolicy
     public function update(User $user, User $model): bool
     {
         //
+        if($user->is_super_admin == true or $user->is_admin == true){
+            return true;
+        }
+
     }
 
     /**
@@ -45,6 +49,10 @@ class UserPolicy
     public function delete(User $user, User $model): bool
     {
         //
+        if(($user->is_super_admin == true or $user->is_admin == true)){
+            return true;
+        }
+
     }
 
     /**

@@ -99,6 +99,11 @@ Route::get('/post/{post}' , [PostController::class , 'single_post']);
 // Route for get the profile page of the user
 Route::get('/profile/{user}' , [UserController::class , 'profile']);
 
+Route::get('/change-user-information/{user}' , function(User $user){
+    return view('user.change-information' , ['user' => $user]);
+});
+
+Route::post('/change-user-information/{user}' , [UserController::class , 'change_user_information']);
 // Route for list of all post for super admins
 Route::get('/list/posts' , [PostController::class , 'post_list'])->middleware('mustBeLoggedIn');
 
@@ -110,7 +115,7 @@ Route::get('/edit-post-page/{post}' , [PostController::class , 'edit_form'])->mi
 Route::put('/update-post/{post}' , [PostController::class , 'update_post']);
 
 
-// Route for see public posts
+Route::delete('/delete/user/{user}' , [UserController::class , 'delete']);
 
 
 

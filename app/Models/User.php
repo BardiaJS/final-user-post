@@ -52,7 +52,7 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    protected function thumbnail():Attribute{
+    protected function avatar():Attribute{
         return Attribute::make(get: function($value){
             return $value ? '/storage/avatars/'. $value : '/fallback-avatar.jpg';
         });

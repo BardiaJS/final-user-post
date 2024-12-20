@@ -119,30 +119,83 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $user_related_posts = $user->posts()->latest()->get();
-        return view('user.profile-page', ['user' => $user , 'posts' => $user_related_posts , 'post_count' => $user->posts()->count()]);
+        return view('user.profile-page', ['user' => $user, 'posts' => $user_related_posts, 'post_count' => $user->posts()->count()]);
     }
-    public function user_list(){
-        if(Auth::user()->is_super_admin == true or Auth::user()->is_admin == true){
+    public function user_list()
+    {
+        if (Auth::user()->is_super_admin == true or Auth::user()->is_admin == true) {
             $users = User::all();
-            return view('user.user-list' , ['users' => $users]);
+            return view('user.user-list', ['users' => $users]);
         }
     }
 
-    public function upload_change_avatar(Request $request , User $user){
+    public function upload_change_avatar(Request $request, User $user)
+    {
         $user_id = $user->id;
         $request->validate([
             'avatar' => 'nullable|image|max:3000', // Validate image
         ]);
-        $fileName = $user->id.'_'.uniqid().'.jpg';
+        $fileName = $user->id . '_' . uniqid() . '.jpg';
         $imageData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
-        Storage::put('public/avatars/'.$fileName, $imageData);
+        Storage::put('public/avatars/' . $fileName, $imageData);
         $oldavatar = $user->avatar;
         $user->avatar = $fileName;
         $user->save();
 
-        if($oldavatar != "/fallback-avatar.jpg"){
-            Storage::delete(str_replace("/storage/" , "public" , $oldavatar));
+        if ($oldavatar != "/fallback-avatar.jpg") {
+            Storage::delete(str_replace("/storage/", "public", $oldavatar));
         }
         return redirect("/profile/$user_id")->with('success', 'avatar successfully uploaded!');
+    }
+
+    public function change_user_information(Request $request, User $user)
+    {
+
+        if (Auth::check()) {
+            if (Auth::user()->is_super_admin == 1) {
+                $validated = $request->validate([
+                    'first_name' => ['sometimes', 'max:10'],
+                    'last_name' => ['sometimes', 'max:30'],
+                    'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
+                    'email' => ['sometimes', 'email', Rule::unique('users', 'email')],
+                    'password' => ['sometimes', 'min:6'],
+                    'is_admin' => ['sometimes', 'in:true,false']
+                ]);
+                $user->update($validated);
+                return redirect('/welcome-page')->with('success', "You successfully updated the user!");
+            } else if (Auth::user()->is_admin == 1) {
+                $validated = $request->validate([
+                    'first_name' => ['sometimes', 'max:10'],
+                    'last_name' => ['sometimes', 'max:30'],
+                    'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
+                    'email' => ['sometimes', 'email', Rule::unique('users', 'email')],
+                    'password' => ['sometimes', 'min:6'],
+                    'is_admin' => ['sometimes']
+                ]);
+                $user->update($validated);
+                return redirect('/welcome-page')->with('success', "You successfully updated the user!");
+            }else{
+                $validated = $request->validate([
+                    'first_name' => ['sometimes', 'max:10'],
+                    'last_name' => ['sometimes', 'max:30'],
+                    'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
+                    'email' => ['sometimes', 'email', Rule::unique('users', 'email')],
+                    'password' => ['sometimes', 'min:6'],
+                    'is_admin' => ['sometimes']
+                ]);
+                $user->update($validated);
+                return redirect('/welcome-page')->with('success', "You successfully update!");
+            }
+        }
+    }
+
+
+    public function delete(User $user){
+        if (auth()->user()->cannot('delete', $user)) {
+            return 'You cannot do that!';
+        } else {
+            $user->delete();
+            return redirect("/list/users")->with('success', 'You successfully deleted the user');
+        }
     }
 }
