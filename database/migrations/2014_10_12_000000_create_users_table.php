@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->dateTime('last_entry')->nullable();
-            $table->string('is_admin')->default(false);
-            $table->string('is_super_admin')->default(false);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_super_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

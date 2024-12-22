@@ -12,11 +12,11 @@
             </div>
         @endif --}}
 
-        @if (auth()->user()->avatar)
+
             <img data-toggle="tooltip" data-placement="bottom"
                 style="width:200px; height: 200px; clip-path:circle(); margin-top:30px; margin-bottom:30px"
-                src="{{ asset(auth()->user()->avatar) }}" />
-        @endif
+                src="{{ $post->thumbnail }}" />
+
         <form method="POST" action="/upload-thumbnail/{{ $post->id }}" enctype="multipart/form-data">
             @csrf
             <input type="file" class="form-control" name="thumbnail" />
