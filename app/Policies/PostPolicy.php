@@ -45,7 +45,7 @@ class PostPolicy
         if($user->is_super_admin == true or $user->is_admin == true){
             return true;
         }
-        return $user->id = $post->user_id;
+        return $user->id === $post->user_id;
     }
 
     /**
@@ -56,7 +56,7 @@ class PostPolicy
         if($user->is_super_admin == true or $user->is_admin == true){
             return true;
         }
-        return $user->id = $post->user_id;
+        return $user->id === $post->user_id;
 
     }
 

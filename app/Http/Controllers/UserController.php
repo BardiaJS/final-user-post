@@ -131,21 +131,25 @@ class UserController extends Controller
 
     public function upload_change_avatar(Request $request, User $user)
     {
-        $user_id = $user->id;
-        $request->validate([
-            'avatar' => 'nullable|image|max:3000', // Validate image
-        ]);
-        $fileName = $user->id . '_' . uniqid() . '.jpg';
-        $imageData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
-        Storage::put('public/avatars/' . $fileName, $imageData);
-        $oldavatar = $user->avatar;
-        $user->avatar = $fileName;
-        $user->save();
+        if (!empty($request['avatar'])) {
+            $user_id = $user->id;
+            $request->validate([
+                'avatar' => 'nullable|image|max:3000', // Validate image
+            ]);
+            $fileName = $user->id . '_' . uniqid() . '.jpg';
+            $imageData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
+            Storage::put('public/avatars/' . $fileName, $imageData);
+            $oldavatar = $user->avatar;
+            $user->avatar = $fileName;
+            $user->save();
 
-        if ($oldavatar != "/fallback-avatar.jpg") {
-            Storage::delete(str_replace("/storage/", "public", $oldavatar));
+            if ($oldavatar != "/fallback-avatar.jpg") {
+                Storage::delete(str_replace("/storage/", "public", $oldavatar));
+            }
+            return redirect("/profile/$user_id")->with('success', 'avatar successfully uploaded!');
+        } else {
+            return back()->with("failure", "you cannot upload nothing!");
         }
-        return redirect("/profile/$user_id")->with('success', 'avatar successfully uploaded!');
     }
 
     public function change_user_information(Request $request, User $user)
@@ -174,7 +178,7 @@ class UserController extends Controller
                 ]);
                 $user->update($validated);
                 return redirect('/welcome-page')->with('success', "You successfully updated the user!");
-            }else{
+            } else {
                 $validated = $request->validate([
                     'first_name' => ['sometimes', 'max:10'],
                     'last_name' => ['sometimes', 'max:30'],
@@ -190,7 +194,8 @@ class UserController extends Controller
     }
 
 
-    public function delete(User $user){
+    public function delete(User $user)
+    {
         if (auth()->user()->cannot('delete', $user)) {
             return 'You cannot do that!';
         } else {

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>OurApp</title>
+    <title>Software</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
@@ -22,28 +22,28 @@
 <body>
     <header class="header-bar mb-3">
         <div class="container d-flex flex-column flex-md-row align-items-center p-3">
-            <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">OurApp</a></h4>
+            <h4 class="my-0 mr-md-auto font-weight-normal"><a style="margin-right: 20px;" href="/" class="text-white">Software</a></h4>
             @auth
                 @if (auth()->user()->is_super_admin == true or auth()->user()->is_admin === true)
                     <form action="/add-users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         @csrf
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Add User</button>
+                                <button class="btn btn-sm" style="color: #9AA6B2">Add User</button>
                             </div>
                         </div>
                     </form>
                     <form action="/list/posts" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Post List</button>
+                                <button class="btn btn-sm" style="color: #9AA6B2">Post List</button>
                             </div>
                         </div>
                     </form>
                     <form action="/list/users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-primary btn-sm">Users</button>
+                                <button class="btn btn-sm" style="color: #9AA6B2">Users</button>
                             </div>
                         </div>
                     </form>
@@ -54,7 +54,7 @@
                 <form action="/create-post-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Create Post</button>
+                            <button class="btn btn-sm" style="color: #9AA6B2">Create Post</button>
                         </div>
                     </div>
                 </form>
@@ -62,21 +62,21 @@
                 <form action="/profile/{{auth()->user()->id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Profile</button>
+                            <button class="btn btn-sm" style="color: #9AA6B2">Profile</button>
                         </div>
                     </div>
                 </form>
                 <form action="/change-password-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Change Password</button>
+                            <button class="btn btn-sm" style="color: #9AA6B2">Change Password</button>
                         </div>
                     </div>
                 </form>
                 <form action="/post/public" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Posts</button>
+                            <button class="btn btn-sm" style="color: #9AA6B2">Posts</button>
                         </div>
                     </div>
                 </form>
@@ -84,7 +84,7 @@
                     @csrf
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-primary btn-sm">Sign Out</button>
+                            <button class="btn btn-sm" style="color: #9AA6B2">Sign Out</button>
                         </div>
                     </div>
                 </form>
@@ -120,7 +120,7 @@
 
     <!-- footer begins -->
     <footer class="border-top text-center small text-muted py-3">
-        <p class="m-0">Copyright &copy; 2022 <a href="/" class="text-muted">OurApp</a>. All rights reserved.
+        <p class="m-0">Copyright &copy;  {{date("Y/m/d")}} <a href="/" class="text-muted">Software</a>. All rights reserved.
         </p>
     </footer>
 

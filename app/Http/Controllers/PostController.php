@@ -65,7 +65,7 @@ class PostController extends Controller
         $validated['user_id'] = Auth::user()->id;
         $post->update($validated);
         $post->id;
-        return back()->with('success', "You successfully create a post!");
+        return redirect("/add-thumbnail/$post->id")->with('success', "You successfully create a post!");
     }
 
 
@@ -88,23 +88,24 @@ class PostController extends Controller
     public function upload_change_thumbnail(Request $request, Post $post)
     {
 
-        $user_id = $post->user->id;
-        $request->validate([
-            'thumbnail' => 'nullable|image|max:3000', // Validate image
-        ]);
-        $fileName = $post->id.'_'.uniqid().'.jpg';
-        $imageData = Image::make($request->file('thumbnail'))->fit(120)->encode('jpg');
-        Storage::put('public/thumbnails/'.$fileName, $imageData);
-        $oldThumbnail = $post->thumbnail;
-        $post->thumbnail = $fileName;
-        $post->save();
+        if (!empty($request['thumbnanil'])) {
+            $user_id = $post->user->id;
+            $request->validate([
+                'thumbnail' => 'nullable|image|max:3000', // Validate image
+            ]);
+            $fileName = $post->id . '_' . uniqid() . '.jpg';
+            $imageData = Image::make($request->file('thumbnail'))->fit(120)->encode('jpg');
+            Storage::put('public/thumbnails/' . $fileName, $imageData);
+            $oldThumbnail = $post->thumbnail;
+            $post->thumbnail = $fileName;
+            $post->save();
 
-        if($oldThumbnail != "/fallback-thumbnail.jpg"){
-            Storage::delete(str_replace("/storage/" , "public" , $oldThumbnail));
+            if ($oldThumbnail != "/fallback-thumbnail.jpg") {
+                Storage::delete(str_replace("/storage/", "public", $oldThumbnail));
+            }
+            return redirect("/profile/$user_id")->with('success', 'thumbnail successfully uploaded!');
+        } else {
+            return back()->with('failure', "You cannot upload nothing!");
         }
-        return redirect("/profile/$user_id")->with('success', 'thumbnail successfully uploaded!');
     }
-
-
-
 }

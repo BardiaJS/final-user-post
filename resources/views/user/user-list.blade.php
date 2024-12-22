@@ -5,7 +5,7 @@
 
         <div class="list-group">
             @foreach ($users as $user)
-                <div style="justify-content: center; " class="profile-nav nav nav-tabs pt-2 mb-4">
+                <div style="justify-content: center; " class="profile-nav nav  pt-2 mb-4">
                     <a href="/profile/{{ $user->id }}" class="profile-nav-link nav-item nav-link active">
                         <h2 style="justify-content: center;">
                             <img class="avatar-small" src="{{ $user->avatar }}" />
@@ -40,6 +40,6 @@
                 </div>
             @endforeach
 
-        </div>
+
     </div>
 </x-user-list-layout>

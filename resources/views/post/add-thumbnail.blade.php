@@ -2,8 +2,8 @@
     <div id="contact" class="container"
         style="text-align: center; display:block; justify-content:center; align-items:center">
 
-        <h1 class="text-center" style="margin-top: 100px">Image Upload</h1>
-        @error('avatar')
+        <h1 class="text-center" style="margin-top: 100px">Thumbnail Upload</h1>
+        @error('thumbnail')
             <p class="m-0 small alert alert-danger shadow-sm">{{ $message }}</p>
         @enderror
         {{-- @if ($message = Session::get('success'))
@@ -22,7 +22,7 @@
             <input type="file" class="form-control" name="thumbnail" />
             <button type="submit" class="btn btn-success" style="margin-top: 30px">Upload</button>
         </form>
-        <form method="GET" action="/upload-thumbnail/{{ $post->id }}" enctype="multipart/form-data">
+        <form method="GET" action="/profile/{{ $post->user->id }}" enctype="multipart/form-data">
             <button type="submit" class="btn btn-success" style="margin-top: 30px; margin-bottom:30px">Next</button>
         </form>
     </div>

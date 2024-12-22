@@ -84,7 +84,7 @@ Route::get('/manage-avatar/{user}' , function(User $user){
     return view('user.add-avatar' , ['user' => $user]);
 })->middleware('mustBeLoggedIn');
 
-Route::post('upload-avatar/{user}' , [UserController::class , 'upload_change_avatar'])->middleware('mustBeLoggedIn');
+Route::post('/upload-avatar/{user}' , [UserController::class , 'upload_change_avatar'])->middleware('mustBeLoggedIn');
 
 Route::get('/post/public' , [PostController::class , 'public_post'])->middleware('mustBeLoggedIn');
 
