@@ -118,13 +118,13 @@ class UserController extends Controller
 
     public function profile(User $user)
     {
-        $user_related_posts = $user->posts()->latest()->get();
+        $user_related_posts = $user->posts()->latest()->paginate(5);
         return view('user.profile-page', ['user' => $user, 'posts' => $user_related_posts, 'post_count' => $user->posts()->count()]);
     }
     public function user_list()
     {
         if (Auth::user()->is_super_admin == true or Auth::user()->is_admin == true) {
-            $users = User::all();
+            $users = User::paginate(10);
             return view('user.user-list', ['users' => $users]);
         }
     }

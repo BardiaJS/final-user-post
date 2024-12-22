@@ -6,7 +6,8 @@
         </h2>
         @if ((auth()->user()->id = ($user->id or auth()->user()->is_admin == true)) or auth()->user()->is_super_admin == true)
             <a href="/manage-avatar/{{ $user->id }}" class="btn btn-secondary btn-small">Manage Avatar</a>
-            <a href="/change-user-information/{{ $user->id }}" class="btn btn-secondary btn-small" style="text-align:center; justify-content:center;">Setting
+            <a href="/change-user-information/{{ $user->id }}" class="btn btn-secondary btn-small"
+                style="text-align:center; justify-content:center;">Setting
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-gear" viewBox="0 0 16 16">
                     <path
@@ -30,7 +31,9 @@
                     <h5 style="color:#929292; font-size:14px">is visible? {{ $post->is_visible }}</h5>
                 </a>
             @endforeach
-
+            <div class="mt-4">
+                {{ $posts->links() }}
+            </div>
         </div>
     </div>
 

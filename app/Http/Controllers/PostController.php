@@ -74,14 +74,14 @@ class PostController extends Controller
         if (auth()->user()->is_super_admin != true or auth()->user()->is_admin != true) {
             return back()->with('failure', "You can't do that");
         } else {
-            $posts = Post::all();
+            $posts = Post::paginate(5);
             return view('post.post-list', ['posts' => $posts]);
         }
     }
 
     public function public_post()
     {
-        $posts = Post::where('is_visible', 'true')->get();
+        $posts = Post::where('is_visible', 'true')->paginate(5);
         return view('post.public-post', ['posts' => $posts]);
     }
 
