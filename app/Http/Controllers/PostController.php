@@ -88,7 +88,7 @@ class PostController extends Controller
     public function upload_change_thumbnail(Request $request, Post $post)
     {
 
-        if (!empty($request['thumbnanil'])) {
+        if (!empty($request['thumbnail'])) {
             $user_id = $post->user->id;
             $request->validate([
                 'thumbnail' => 'nullable|image|max:3000', // Validate image
@@ -104,7 +104,7 @@ class PostController extends Controller
                 Storage::delete(str_replace("/storage/", "public", $oldThumbnail));
             }
             return redirect("/profile/$user_id")->with('success', 'thumbnail successfully uploaded!');
-        } else {
+        }else {
             return back()->with('failure', "You cannot upload nothing!");
         }
     }
