@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title style="color: #9AA6B2" >Software</title>
+    <title style="color: #9AA6B2">Software</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
     <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
@@ -17,6 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="/main.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+    </style>
 </head>
 
 <body>
@@ -25,7 +28,8 @@
             <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">Software</a></h4>
             @auth
 
-                <form action="/profile/{{$user->id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                <form action="/profile/{{ $user->id }}" method="GET" class="mb-0 pt-2 pt-md-0"
+                    style="margin-right: 5px">
 
                     <div class="row align-items-center">
                         <div class="col-md-auto">

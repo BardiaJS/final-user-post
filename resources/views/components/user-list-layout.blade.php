@@ -17,6 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="/main.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+    </style>
 </head>
 
 <body>
@@ -74,7 +77,8 @@
 
     <!-- footer begins -->
     <footer class="border-top text-center small text-muted py-3">
-        <p class="m-0">Copyright &copy;  {{date("Y/m/d")}} <a href="/" class="text-muted">Software</a>. All rights reserved.
+        <p class="m-0">Copyright &copy; {{ date('Y/m/d') }} <a href="/" class="text-muted">Software</a>. All
+            rights reserved.
         </p>
     </footer>
 
