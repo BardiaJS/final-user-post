@@ -41,11 +41,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-
-        if($user->is_super_admin == true or $user->is_admin == true){
-            return true;
-        }
-        return $user->id === $post->user_id;
+        return $user->is_admin || $user->is_super_admin || $user->id === $post->user_id;
     }
 
     /**
@@ -53,10 +49,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        if($user->is_super_admin == true or $user->is_admin == true){
-            return true;
-        }
-        return $user->id === $post->user_id;
+        return $user->is_admin || $user->is_super_admin || $user->id === $post->user_id;
 
     }
 

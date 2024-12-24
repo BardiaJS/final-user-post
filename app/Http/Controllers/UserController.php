@@ -22,7 +22,7 @@ class UserController extends Controller
                     'display_name' => ['required', 'max:10', 'regex:/^\S*$/'],
                     'email' => ['required', 'email', Rule::unique('users', 'email')],
                     'password' => ['required', 'min:6'],
-                    'is_admin' => ['required', 'in:true,false']
+                    'is_admin' => ['required', 'in:1,0']
                 ]);
                 User::create($validated);
                 return redirect('/')->with('success', "You successfully create the user!");
@@ -163,7 +163,7 @@ class UserController extends Controller
                     'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
                     'email' => ['sometimes', 'email'],
                     'password' => ['sometimes', 'min:6'],
-                    'is_admin' => ['sometimes', 'in:true,false']
+                    'is_admin' => ['sometimes', 'in:1,0']
                 ]);
                 $user->update($validated);
                 return redirect('/welcome-page')->with('success', "You successfully updated the user!");

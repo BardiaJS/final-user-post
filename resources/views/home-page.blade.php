@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label for="is_admin" class="text-muted mb-1"><small>Is Admin?</small></label>
                                 <input value="{{old('is_admin')}}" name="is_admin" id="is_admin-register-confirm" class="form-control" type="text"
-                                    placeholder="Is Admin" />
+                                    placeholder="Is Admin(1 for yes and 0 for no)" />
                                 @error('is_admin')
                                     <p class="m-0 small alert alert-danger shadow-sm">{{ $message }}</p>
                                 @enderror

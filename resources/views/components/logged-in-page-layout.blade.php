@@ -28,7 +28,7 @@
             <h4 class="my-0 mr-md-auto font-weight-normal"><a style="margin-right: 20px; color:black;"
                     href="/">Software</a></h4>
             @auth
-                @if (auth()->user()->is_super_admin == true or auth()->user()->is_admin === true)
+                @if (auth()->user()->is_super_admin == 1 or auth()->user()->is_admin == 1)
                     <form action="/add-users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         @csrf
                         <div class="row align-items-center">
