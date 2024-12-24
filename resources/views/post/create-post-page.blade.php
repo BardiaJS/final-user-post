@@ -7,7 +7,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name-register" class="text-muted mb-1"><small>Name</small></label>
-                        <input name="name" id="name-register" class="form-control" type="text"
+                        <input value="{{old('name')}}" name="name" id="name-register" class="form-control" type="text"
                             placeholder="Post Name" autocomplete="off" />
 
                         @error('name')
@@ -17,7 +17,7 @@
 
                     <div class="form-group">
                         <label for="content-register" class="text-muted mb-1"><small>Content</small></label>
-                        <input name="content" id="content-register" class="form-control" type="text"
+                        <input value="{{old('content')}}" name="content" id="content-register" class="form-control" type="text"
                             placeholder="Post Content" autocomplete="off" />
 
                         @error('content')
@@ -28,7 +28,7 @@
 
                     <div class="form-group">
                         <label for="tags-register" class="text-muted mb-1"><small>Tags</small></label>
-                        <input name="tags" id="tags-register" class="form-control" type="text"
+                        <input value="{{old('tags')}}" name="tags" id="tags-register" class="form-control" type="text"
                             placeholder='tages (seprated by ",")' autocomplete="off" />
 
                         @error('tags')
@@ -38,14 +38,15 @@
 
                     <div class="form-group">
                         <label for="is_visible-register" class="text-muted mb-1"><small>Is Visible</small></label>
-                        <input name="is_visible" id="is_visible-register" class="form-control" type="text"
+                        <input value="{{old('is_visible')}}" name="is_visible" id="is_visible-register" class="form-control" type="text"
                             placeholder="Is Visible?" />
                         @error('is_visible')
                             <p class="m-0 small alert alert-danger shadow-sm">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Post</button>
+                    <button type="submit" class="btn btn-outline-primary" >Post</button>
+
                 </form>
             </div>
         </div>

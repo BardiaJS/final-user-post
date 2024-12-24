@@ -46,7 +46,8 @@
                         @enderror
                     </div>
 
-                    <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Save Changes</button>
+                    <button type="submit" class="btn btn-outline-primary" >Save Changes</button>
+
                 </form>
             </div>
         </div>

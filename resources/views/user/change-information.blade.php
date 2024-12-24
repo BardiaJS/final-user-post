@@ -47,7 +47,7 @@
 
 
                     @auth
-                        @if (auth()->user()->is_super_admin == true)
+                        @if (auth()->user()->is_super_admin == true and auth()->user()->id != $user->id)
                             <div class="form-group">
                                 <label for="is_admin" class="text-muted mb-1"><small>Is Admin?</small></label>
                                 <input value="{{$user->is_admin}}" name="is_admin" id="is_admin-register-confirm" class="form-control" type="text"
@@ -58,7 +58,8 @@
                             </div>
                         @endif
                     @endauth
-                    <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Save Changes</button>
+                    <button type="submit" class="btn btn-outline-primary" >Save Changes</button>
+
                 </form>
             </div>
         </div>

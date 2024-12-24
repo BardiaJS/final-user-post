@@ -6,7 +6,7 @@ body,
 }
 
 .header-bar {
-  background-color: #BCCCDC;
+  background-color: #ffffff;
 }
 
 .container--narrow {
@@ -396,3 +396,4 @@ header .flex-row > div {
 header .flex-row > div > div {
     display: inline;
 }
+

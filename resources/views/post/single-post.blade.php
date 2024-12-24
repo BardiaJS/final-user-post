@@ -1,12 +1,16 @@
 <x-single-post-layout :post="$post">
-    <div class="container py-md-5 container--narrow" style="background-image: url('{{ $post->thumbnail }}');   background-repeat: no-repeat;  background-size: cover;">
+    <div class="container py-md-5 container--narrow">
         <p class="text-muted small mb-4">
-            <a href="/profile/{{$post->user->id}}"><img class="avatar-tiny" src="{{ $post->user->avatar }}" style=""/></a>
+            <a href="/profile/{{ $post->user->id }}"><img class="avatar-tiny" src="{{ $post->user->avatar }}"
+                    style="" /></a>
             Posted by <a href="/profile/{{ $post->user->id }}">{{ $post->user->display_name }}</a> on
             {{ $post->created_at->format('n/j/Y') }}
         </p>
         <div class="d-flex justify-content-between">
-            <h2>{{ $post->name }}</h2>
+            <div class="body-content">
+                <img src="{{ $post->thumbnail }}">
+            </div>
+
             @can('update', $post)
                 <span class="pt-2">
                     <a href="/edit-post-page/{{ $post->id }}" class="text-primary mr-2" data-toggle="tooltip"
@@ -21,18 +25,17 @@
             @endcan
         </div>
 
+        <div class="body-content">
+            <h2>{{ $post->name }}</h2>
 
+        </div>
 
         <div class="body-content">
             <p>{{ $post->content }}</p>
         </div>
 
         <div class="body-content">
-            <p><strong>Is Visible? </strong>{{ $post->is_visible }}</p>
-        </div>
-
-        <div class="body-content" >
-            <p><strong >Tags: </strong>{{ $post->tags }}</p>
+            <p><strong>Tags: </strong>{{ $post->tags}}</p>
         </div>
 
 

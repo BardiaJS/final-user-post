@@ -68,7 +68,8 @@
                             </div>
                         @endif
                     @endauth
-                    <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Register</button>
+                    <button type="submit" class="btn btn-outline-primary" >Register</button>
+
                 </form>
             </div>
         </div>

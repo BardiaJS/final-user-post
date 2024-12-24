@@ -161,7 +161,7 @@ class UserController extends Controller
                     'first_name' => ['sometimes', 'max:10'],
                     'last_name' => ['sometimes', 'max:30'],
                     'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
-                    'email' => ['sometimes', 'email', Rule::unique('users', 'email')],
+                    'email' => ['sometimes', 'email'],
                     'password' => ['sometimes', 'min:6'],
                     'is_admin' => ['sometimes', 'in:true,false']
                 ]);
@@ -172,7 +172,7 @@ class UserController extends Controller
                     'first_name' => ['sometimes', 'max:10'],
                     'last_name' => ['sometimes', 'max:30'],
                     'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
-                    'email' => ['sometimes', 'email', Rule::unique('users', 'email')],
+                    'email' => ['sometimes', 'email'],
                     'password' => ['sometimes', 'min:6'],
                     'is_admin' => ['sometimes']
                 ]);
@@ -183,7 +183,7 @@ class UserController extends Controller
                     'first_name' => ['sometimes', 'max:10'],
                     'last_name' => ['sometimes', 'max:30'],
                     'display_name' => ['sometimes', 'max:10', 'regex:/^\S*$/'],
-                    'email' => ['sometimes', 'email', Rule::unique('users', 'email')],
+                    'email' => ['sometimes', 'email'],
                     'password' => ['sometimes', 'min:6'],
                     'is_admin' => ['sometimes']
                 ]);

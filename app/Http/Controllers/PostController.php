@@ -14,7 +14,7 @@ class PostController extends Controller
     public function store_post(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'max:10'],
+            'name' => ['required', 'max:150'],
             'content' => ['required'],
             'tags' => ['required'],
             'is_visible' => ['sometimes', 'in:true,false'],
@@ -57,7 +57,7 @@ class PostController extends Controller
     public function update_post(Request $request, Post $post)
     {
         $validated = $request->validate([
-            'name' => ['required', 'max:10'],
+            'name' => ['required', 'max:150'],
             'content' => ['required'],
             'tags' => ['required'],
             'is_visible' => ['sometimes', 'in:true,false'],
@@ -108,4 +108,6 @@ class PostController extends Controller
             return back()->with('failure', "You cannot upload nothing!");
         }
     }
+
+
 }

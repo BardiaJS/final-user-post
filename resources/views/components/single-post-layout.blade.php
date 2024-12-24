@@ -27,7 +27,7 @@
                 <form action="/profile/{{$post->user_id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">back</button>
+                            <button type="submit" class="btn btn-outline-primary">Back</button>
                         </div>
                     </div>
                 </form>
@@ -36,7 +36,7 @@
                     @csrf
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Sign Out</button>
+                            <button type="submit" class="btn btn-outline-primary">Sign out</button>
                         </div>
                     </div>
                 </form>

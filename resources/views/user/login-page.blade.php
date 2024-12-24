@@ -25,7 +25,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="py-3 mt-4 btn btn-lg btn-success btn-block">Login</button>
+                <button type="submit" class="btn btn-outline-primary">Login</button>
             </form>
         </div>
         <div class="col" style="display: flex; justify-content:center; align-items:center;">

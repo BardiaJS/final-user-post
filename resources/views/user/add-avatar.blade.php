@@ -20,10 +20,11 @@
         <form method="POST" action="/upload-avatar/{{ $user->id }}" enctype="multipart/form-data">
             @csrf
             <input type="file" class="form-control" name="avatar" />
-            <button type="submit" class="btn btn-success" style="margin-top: 30px">Upload</button>
+            <button type="submit" class="btn btn-outline-primary" style="margin-top: 30px">Upload</button>
         </form>
         <form method="GET" action="/profile/{{ $user->id }}" enctype="multipart/form-data">
-            <button type="submit" class="btn btn-success" style="margin-top: 30px; margin-bottom:30px">Next</button>
+            <button type="submit" class="btn btn-outline-primary" style="margin-top: 30px; margin-bottom:30px">Next</button>
+
         </form>
     </div>
 </x-add-thumbnail-layout>

@@ -29,7 +29,7 @@
 
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">back</button>
+                            <button type="submit" class="btn btn-outline-primary">Back</button>
                         </div>
                     </div>
                 </form>
@@ -38,7 +38,7 @@
                     @csrf
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Sign Out</button>
+                            <button type="submit" class="btn btn-outline-primary">Sign out</button>
                         </div>
                     </div>
                 </form>

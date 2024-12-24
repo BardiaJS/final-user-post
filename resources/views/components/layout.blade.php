@@ -29,7 +29,7 @@
                     <form action="/welcome-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-sm" style="color: #9AA6B2">back</button>
+                                <button type="submit" class="btn btn-outline-primary">Back</button>
                             </div>
                         </div>
                     </form>
@@ -38,10 +38,10 @@
 
 
 
-                <form action="/logout" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                <form action="/create-post-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Create Post</button>
+                            <button type="submit" class="btn btn-outline-primary">Create Post</button>
                         </div>
                     </div>
                 </form>
@@ -49,21 +49,21 @@
                 <form action="/profile/{{auth()->user()->id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Profile</button>
+                            <button type="submit" class="btn btn-outline-primary">Profile</button>
                         </div>
                     </div>
                 </form>
-                <form action="/logout" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                <form action="/change-password-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Change Password</button>
+                            <button type="submit" class="btn btn-outline-primary">Change Password</button>
                         </div>
                     </div>
                 </form>
-                <form action="/logout" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
+                <form action="/post/public" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Posts</button>
+                            <button type="submit" class="btn btn-outline-primary">Posts</button>
                         </div>
                     </div>
                 </form>
@@ -71,7 +71,7 @@
                     @csrf
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Sign Out</button>
+                            <button type="submit" class="btn btn-outline-primary">Sign out</button>
                         </div>
                     </div>
                 </form>
@@ -80,7 +80,7 @@
                 <form action="/login" method="GET" class="mb-0 pt-2 pt-md-0">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Already Have An Account?</button>
+                            <button type="submit" class="btn btn-outline-primary">Already Have An Account?</button>
                         </div>
                     </div>
                 </form>

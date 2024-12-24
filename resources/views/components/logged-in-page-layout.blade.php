@@ -22,28 +22,28 @@
 <body>
     <header class="header-bar mb-3">
         <div class="container d-flex flex-column flex-md-row align-items-center p-3">
-            <h4 class="my-0 mr-md-auto font-weight-normal"><a style="margin-right: 20px;" href="/" class="text-white">Software</a></h4>
+            <h4 class="my-0 mr-md-auto font-weight-normal"><a style="margin-right: 20px; color:black;" href="/">Software</a></h4>
             @auth
                 @if (auth()->user()->is_super_admin == true or auth()->user()->is_admin === true)
                     <form action="/add-users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         @csrf
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-sm" style="color: #9AA6B2">Add User</button>
+                                <button type="submit" class="btn btn-outline-primary">Add User</button>
                             </div>
                         </div>
                     </form>
                     <form action="/list/posts" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-sm" style="color: #9AA6B2">Post List</button>
+                                <button type="submit" class="btn btn-outline-primary">Post List</button>
                             </div>
                         </div>
                     </form>
                     <form action="/list/users" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                         <div class="row align-items-center">
                             <div class="col-md-auto">
-                                <button class="btn btn-sm" style="color: #9AA6B2">Users</button>
+                                <button type="submit" class="btn btn-outline-primary">Users</button>
                             </div>
                         </div>
                     </form>
@@ -54,7 +54,7 @@
                 <form action="/create-post-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Create Post</button>
+                            <button type="submit" class="btn btn-outline-primary">Create Posts</button>
                         </div>
                     </div>
                 </form>
@@ -62,21 +62,21 @@
                 <form action="/profile/{{auth()->user()->id}}" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Profile</button>
+                            <button type="submit" class="btn btn-outline-primary">Profile</button>
                         </div>
                     </div>
                 </form>
                 <form action="/change-password-page" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Change Password</button>
+                            <button type="submit" class="btn btn-outline-primary">Chnage Password</button>
                         </div>
                     </div>
                 </form>
                 <form action="/post/public" method="GET" class="mb-0 pt-2 pt-md-0" style="margin-right: 5px">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Posts</button>
+                            <button type="submit" class="btn btn-outline-primary">Posts</button>
                         </div>
                     </div>
                 </form>
@@ -84,7 +84,7 @@
                     @csrf
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <button class="btn btn-sm" style="color: #9AA6B2">Sign Out</button>
+                            <button type="submit" class="btn btn-outline-primary">Sign out</button>
                         </div>
                     </div>
                 </form>
